@@ -1,0 +1,124 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div [class]="'container'">
+  <div>
+    <h2 [style.color]="'violet'">Contact Our </h2>
+    <h2>Customer Support Center</h2>
+  </div>
+    <img src="assets/laster.avif"  width="200px" height="150px" alt="logo">
+</div>
+<div class="container-fluid" [style.margin-top]="'20px'">
+  <h2 [style.text-align]="'center'">Contact Information</h2>
+  
+  <p [style.text-align]="'center'">pls fill out your contact information</p>
+
+  <form [formGroup]="Omkarform"   (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Name</label>
+      <small [style.color]="'red'">*</small>
+      <input [class.is-invalid]="Omkarform.get('username')?.invalid"       type="text" class="form-control" formControlName="username">
+      <small [class.d-none]="Omkarform.get('username')?.valid"   class="text-danger">Name Required(only alphabates)</small>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <small [style.color]="'red'">*</small>
+      <input  [class.is-invalid]="Omkarform.get('mail')?.invalid&&Omkarform.get('mail')?.touched"  type="text" class="form-control" formControlName="mail" >
+      <small [class.d-none]="Omkarform.get('mail')?.valid||Omkarform.get('mail')?.untouched"   class="text-danger">mail required(accurate male address)</small>
+
+    </div>
+    <div class="form-group">
+      <label>Phone</label>
+      <small [style.color]="'red'">*</small>
+      <input [class.is-invalid]="Omkarform.get('phone')?.invalid&&Omkarform.get('phone')?.touched"    type="text" class="form-control" formControlName="phone">
+      <small [class.d-none]="Omkarform.get('phone')?.valid||Omkarform.get('phone')?.untouched"   class="text-danger">phone number required</small>
+    
+    </div>
+    <div class="form-group">
+        <label>Address</label>
+        <small [style.color]="'red'">*</small>
+        <input [class.is-invalid]="Omkarform.get('Address')?.invalid&&Omkarform.get('Address')?.touched"    type="text" class="form-control" formControlName="Address">
+        <small [class.d-none]="Omkarform.get('Address')?.valid||Omkarform.get('Address')?.untouched"   class="text-danger">Address required</small>
+      
+      </div>
+     <div class="form-group">
+      <label>City</label>
+      <small [style.color]="'red'">*</small>
+      <input [class.is-invalid]="Omkarform.get('city')?.invalid&&Omkarform.get('city')?.touched"    type="text" class="form-control" formControlName="city">
+      <small [class.d-none]="Omkarform.get('city')?.valid||Omkarform.get('city')?.untouched"   class="text-danger">Enter the name of city</small>
+
+    </div>
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>State</mat-label>
+        <input   [class.is-invalid]="Omkarform.get('stateCtrl')?.invalid&&Omkarform.get('stateCtrl')?.touched" matInput
+               aria-label="State"
+               [matAutocomplete]="auto"
+               [formControl]="stateCtrl">
+        <mat-autocomplete #auto="matAutocomplete">
+          @for (state of filteredStates | async; track state) {
+            <mat-option [value]="state.name">
+              
+              <span>{{state.name}}</span> |
+            
+            </mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+      <div class="form-group">
+        <label>ZIP code</label>
+        <small [style.color]="'red'">*</small>
+        <input [class.is-invalid]="Omkarform.get('zip')?.invalid&&Omkarform.get('zip')?.touched"    type="text" class="form-control" formControlName="zip">
+        <small [class.d-none]="Omkarform.get('zip')?.valid||Omkarform.get('zip')?.untouched"   class="text-danger">Enter proper zip code</small>
+      
+      </div>
+     <div class="form-group">
+      <label>Comments</label>
+      <small [style.color]="'red'">*</small>
+      <input [class.is-invalid]="Omkarform.get('come')?.invalid&&Omkarform.get('come')?.touched"    type="text" class="form-control" formControlName="come">
+      <small [class.d-none]="Omkarform.get('come')?.valid||Omkarform.get('come')?.untouched"   class="text-danger">minimum 30 characters required</small>
+
+    </div>    
+   </div>
+      <button type="button" class="btn btn-primary"[style.margin-top]="'20px'"  [disabled]="!Omkarform.valid">
+          Submit
+      </button>
+      <button type="button" class="btn btn-primary" [style.margin-left]="'20px'"[style.margin-top]="'20px'" (click)="Set()">
+        Refresh
+      </button>
+      {{ Omkarform.status | json }}
+</form>
+</div>
+
+
+
+
+
+<router-outlet></router-outlet>
+
+
+ <!-- <form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>State</mat-label>
+    <input matInput
+           aria-label="State"
+           [matAutocomplete]="auto"
+           [formControl]="stateCtrl">
+    <mat-autocomplete #auto="matAutocomplete">
+      @for (state of filteredStates | async; track state) {
+        <mat-option [value]="state.name">
+          <img alt="" class="example-option-img" [src]="state.flag" height="25">
+          <span>{{state.name}}</span> |
+          <small>Population: {{state.population}}</small>
+        </mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <br>
+
+  <mat-slide-toggle
+    [checked]="stateCtrl.disabled"
+    (change)="stateCtrl.disabled ? stateCtrl.enable() : stateCtrl.disable()">
+    Disable Input?
+  </mat-slide-toggle>
+</form> -->
